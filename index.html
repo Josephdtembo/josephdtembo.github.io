@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Portfolio</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="StyleSheet2.css" />
 </head>
 <body>
@@ -17,6 +18,7 @@
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
+
     <div class="bar-animation">
         <div class="bar" style="--i:6;"></div>
         <div class="bar" style="--i:5;"></div>
@@ -26,17 +28,17 @@
         <div class="bar" style="--i:1;"></div>
     </div>
 
-
-    <section class="home">
+    <section class="home" id="home">
         <div class="home-info">
             <h1>Joseph Tembo</h1>
-            <h2> I'm a 
-            <span style="--i:4;" data-text="Frontend Developer">Frontend Developer</span>
-            <span style="--i:3;" data-text="Youtuber">Youtuber</span>
-            <span style="--i:2;" data-text="Designer">Designer</span>
-            <span style="--i:1;" data-text="Blogger">Blogger</span>
+            <h2>
+                I'm an Engineer in
+                <span class="rotating-text" data-text="Green Building" style="--i:4;"></span>
+                <span class="rotating-text" data-text="Energy Efficiency" style="--i:3;"></span>
+                <span class="rotating-text" data-text="Electronics" style="--i:2;"></span>
+                <span class="rotating-text" data-text="Automation" style="--i:1;"></span>
             </h2>
-            <p>fn dnvvnfnvlnfvflkvfldmlmvnvnvfv jc fjvief lvwe v jnihbndopas lbjvevbjdjd jva dvbsh </p>
+            <p>I am currently pursuing a Master’s in Green Building Engineering & Energy Efficiency at Mohammed VI Polytechnic University (UM6P), a multidisciplinary program focused on designing and implementing sustainable, energy-efficient solutions for the built environment. The curriculum emphasizes green building engineering fundamentals, energy performance optimization, renewable energy integration, thermal comfort and energy efficiency, and simulation tools for building performance analysis, while also developing skills in energy management, building technology, regulations, and project innovation. This hands-on, research-oriented training prepares graduates to address climate and urbanization challenges through sustainable design and energy-efficient building solutions.</p>
             <div class="btn-sci">
                 <a href="#" class="btn">Download CV</a>
                 <div class="sci">
@@ -49,12 +51,26 @@
         </div>
         <div class="home-img">
             <div class="img-box">
-
                 <div class="img-item">
-                    <img src="profileicon.png" alt=""
+                    <img src="profileicon.png" alt="Profile Picture">
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        // Optional: simple rotation using JavaScript if needed
+        const texts = document.querySelectorAll('.rotating-text');
+        let index = 0;
+
+        function rotateText() {
+            texts.forEach((t, i) => t.style.opacity = '0');
+            texts[index].style.opacity = '1';
+            index = (index + 1) % texts.length;
+        }
+
+        rotateText();
+        setInterval(rotateText, 3000); // change every 3 seconds
+    </script>
 </body>
 </html>
