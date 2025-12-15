@@ -62,7 +62,7 @@ a {
 
 .home {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap:50px;
     height: 100vh;
     padding: 60px 9% 0;
@@ -71,6 +71,12 @@ a {
     opacity: 0;
     animation: show-content 1.5s linear forwards;
     animation-delay: 1.6s;
+    overflow: visible; /* ensures rotating text is not clipped */
+}
+
+.home-info {
+    max-width: 50%;
+    overflow: visible; /* important for absolute pseudo-elements */
 }
 
 .home-info h1 {
@@ -82,13 +88,15 @@ a {
     margin-top: -10px;
 }
 
-/* --- ROTATING TEXT (fixed) --- */
+/* --- ROTATING TEXT --- */
 .home-info h2 span.rotating-text {
     position: relative;
     display: inline-block;
     color: transparent;
     -webkit-text-stroke: .7px #7cf03d;
     margin-left: 5px;
+    height: 1.2em; /* ensure space for pseudo-element */
+    z-index: 2;
     animation: display-text 16s linear infinite;
     animation-delay: calc(-4s * var(--i));
 }
@@ -114,7 +122,7 @@ a {
 
 .home-info p {
     font-size: 16px;
-    margin: 10px 0 25px;
+    margin: 20px 0 25px;
 }
 
 .home-info .btn-sci {
