@@ -82,38 +82,33 @@ a {
     margin-top: -10px;
 }
 
-/* --- ROTATING TEXT --- */
-.rotating-text {
-    display: inline-block;
-    vertical-align: bottom;
-    overflow: hidden;
-    height: 1.2em; /* ensures container is tall enough for text */
+/* --- ROTATING TEXT (fixed) --- */
+.home-info h2 span.rotating-text {
     position: relative;
+    display: inline-block;
+    color: transparent;
+    -webkit-text-stroke: .7px #7cf03d;
+    margin-left: 5px;
+    animation: display-text 16s linear infinite;
+    animation-delay: calc(-4s * var(--i));
 }
 
-.rotating-text span {
-    display: block;
+.home-info h2 span.rotating-text::before {
+    content: attr(data-text);
     position: absolute;
-    width: 100%;
-    opacity: 0;
-    transform: translateY(100%);
-    animation: rotateText 12s linear infinite;
-    font-weight: 600;
+    width: 0;
+    border-right: 2px solid #7cf03d;
     color: #7cf03d;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: fill-text 4s linear infinite;
+    animation-delay: calc(-4s * var(--i));
 }
 
-/* Animation delays for each word */
-.rotating-text span:nth-child(1) { animation-delay: 0s; }
-.rotating-text span:nth-child(2) { animation-delay: 3s; }
-.rotating-text span:nth-child(3) { animation-delay: 6s; }
-.rotating-text span:nth-child(4) { animation-delay: 9s; }
-
-@keyframes rotateText {
-    0%   { opacity: 0; transform: translateY(100%); }
-    5%   { opacity: 1; transform: translateY(0%); }
-    25%  { opacity: 1; transform: translateY(0%); }
-    30%  { opacity: 0; transform: translateY(-100%); }
-    100% { opacity: 0; transform: translateY(-100%); }
+@keyframes fill-text {
+    0%, 10% { width: 0; }
+    25%, 70% { width: 100%; }
+    90%, 100% { width: 0; }
 }
 /* --- END ROTATING TEXT --- */
 
