@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
 * {
     margin:0;
     padding:0;
@@ -26,35 +27,42 @@ a {
     animation: show-content 1.5s linear forwards;
     animation-delay: 1.2s;
 }
+
 @keyframes show-content{
     100%{
         visibility:visible;
         opacity:1;
     }
 }
+
 .navbar .logo{
     font-size: 30px;
     font-weight: 700;
 }
+
 .navbar ul{
     display:flex;
 }
+
 .navbar ul li{
     list-style:none;
     margin-left: 35px;
 }
+
 .navbar ul li a{
     font-size: 20px;
     font-weight:500;
     transition: .5s;
 }
+
 .navbar ul li:hover a,
 .navbar ul li.active a{
     color:greenyellow;
 }
+
 .home {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap:50px;
     height: 100vh;
     padding: 60px 9% 0;
@@ -63,30 +71,37 @@ a {
     opacity: 0;
     animation: show-content 1.5s linear forwards;
     animation-delay: 1.6s;
+    overflow: visible; /* ensures pseudo-elements are not clipped */
 }
+
+.home-info {
+    max-width: 50%;
+    overflow: visible;
+}
+
 .home-info h1 {
     font-size: 55px;
 }
+
 .home-info h2 {
-    display: inline-block;
     font-size: 32px;
     margin-top: -10px;
 }
-.home-info h2 span {
-    position:relative;
+
+/* --- ROTATING TEXT --- */
+.home-info h2 span.rotating-text {
+    position: relative;
     display: inline-block;
     color: transparent;
     -webkit-text-stroke: .7px #7cf03d;
+    margin-left: 5px;
+    height: 1.2em;
+    z-index: 2;
     animation: display-text 16s linear infinite;
-    animation-delay: calc(-4s*var(--i));
+    animation-delay: calc(-4s * var(--i));
 }
-@keyframes display-text{
-    25%, 
-    100%{
-        display: none;
-    }
-}
-.home-info h2 span::before {
+
+.home-info h2 span.rotating-text::before {
     content: attr(data-text);
     position: absolute;
     width: 0;
@@ -95,26 +110,33 @@ a {
     white-space: nowrap;
     overflow: hidden;
     animation: fill-text 4s linear infinite;
+    animation-delay: calc(-4s * var(--i));
 }
-@keyframes fill-text{
-    10%,
-    100%{
-        width:0;
-    }
-    70%, 
-    90% {
-        width: 100%;
+
+@keyframes display-text {
+    25%, 
+    100% {
+        display: none;
     }
 }
 
+@keyframes fill-text {
+    0%, 10% { width: 0; }
+    25%, 70% { width: 100%; }
+    90%, 100% { width: 0; }
+}
+/* --- END ROTATING TEXT --- */
+
 .home-info p {
     font-size: 16px;
-    margin: 10px 0 25px;
+    margin: 20px 0 25px;
 }
+
 .home-info .btn-sci {
     display: flex;
     align-items: center;
 }
+
 .btn {
     display: inline-block;
     padding: 10px 30px;
@@ -127,14 +149,17 @@ a {
     font-weight: 600;
     transition: .5s;
 }
+
 .btn:hover {
     background: transparent;
     color:#7cf03d;
     box-shadow: none;
 }
+
 .home-info .btn-sci .sci {
     margin-left: 20px;
 }
+
 .home-info .btn-sci .sci a {
     display: inline-flex;
     padding:8px;
@@ -145,22 +170,26 @@ a {
     margin:0 8px;
     transition: .5s;
 }
+
 .home-info .btn-sci .sci a:hover {
     background:#7cf03d;
     color:#1f242d;
     box-shadow:0 0 10px #7cf03d;
 }
+
+/* --- IMAGE CIRCLE FIX --- */
 .home-img .img-box {
     position: relative;
     width: 32vw;
     height: 32vw;
     border-radius: 50%;
-    padding: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow:hidden;
+    padding: 0; /* remove padding so circle is perfect */
 }
+
 .home-img .img-box::before,
 .home-img .img-box::after {
     content: '';
@@ -171,35 +200,37 @@ a {
     transform: rotate(0deg);
     animation: rotate-border 10s linear infinite;
 }
+
 .home-img .img-box::after {
     animation-delay:-5s;
 }
+
 @keyframes rotate-border {
     100% {
         transform: rotate(360deg);
     }
 }
+
 .home-img .img-box .img-item {
     position: relative;
     width: 100%;
     height: 100%;
-    background: #1f242d;
     border-radius: 50%;
-    border: .1px solid #1f242d;
-    display: flex;
-    justify-content: center;
-    z-index: 1;
     overflow: hidden;
 }
+
 .home-img .img-box .img-item img {
-    width: 100%;       /* fill the container width */
-    height: 100%;      /* fill the container height */
-    object-fit: cover; /* crop to fit circle without distortion */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* fully fills the circle */
+    border-radius: 50%;  /* make image itself circular */
+    display: block;
     position: absolute;
     top: 0;
     left: 0;
-    mix-blend-mode: lighten;
 }
+
+/* --- BACKGROUND BARS --- */
 .bar-animation {
     position:absolute;
     width:100%;
@@ -207,6 +238,7 @@ a {
     display:flex;
     z-index: -1;
 }
+
 .bar-animation .bar {
     width: 100%;
     height: 100%;
@@ -215,6 +247,7 @@ a {
     animation: show-bar .5s ease-in-out forwards;
     animation-delay: calc(.1s * var(--i));
 }
+
 @keyframes show-bar {
     100% {
         transform: translateY(0%);
